@@ -14,12 +14,13 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  
+
   "production": {
-    "username": "psv2wbrumchx1vzm",
-    "password": "m3pnr9dk6ur2uoyi",
+    "use_env_variable": "JAWSDB_URL",
+    "username": "zw6bnc9fyh6ff631",
+    "password": "p6r0lilv2taablwu",
     "database": "c77sx8lvyssgwxme",
-    "host": "gk90usy5ik2otcvi.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host": "lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
