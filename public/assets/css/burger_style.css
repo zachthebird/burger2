@@ -1,0 +1,37 @@
+html, body {
+	background-color: tan;
+}
+
+header h1{
+	margin: auto 0;
+	border-bottom: solid black thick;
+	text-align: center;
+	padding: 30px;
+	font-family: 'Russo One', sans-serif;
+	font-size: 40pt;
+	background: url(../img/ep_naturalwhite.png);
+}
+
+.burger-imgs {
+   margin-top: 20px;
+}
+
+#burger, #devoured{
+	margin: 10px;
+	padding: 10px;
+}
+
+.alert {
+	margin: 20px;
+	padding: 10px;
+	height: 45px;
+}
+
+#input {
+	text-align: center;
+	margin: 20px;
+}
+
+.container {
+	text-align: center;
+}

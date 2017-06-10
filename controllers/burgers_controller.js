@@ -1,64 +1,70 @@
-// Our Burger controller
-// =====================
-// This file uses Sequelize to manage data manipulation
-// for all apropos http requests.
-// NOTE: This is the same file from last week's homework,
-// but with each route gutted and replaced with sequelize queries
-// where references to our outmoded ORM file once sat.
-var express = require("express");
-
+var express = require('express');
 var router = express.Router();
-// edit burger model to match sequelize
-var db = require("../models/");
+var db = require('../models');
 
-// get route -> index
-router.get("/", function(req, res) {
-  // send us to the next get function instead.
-  res.redirect("/burgers");
+router.get('/', function(req, res) {
+	db.Burger.findAll({
+		include: [{
+			model: db.Eater
+		}]
+	}).then(function(result) {
+		res.render('index', {burgers: result});
+	});
 });
 
-// get route, edited to match sequelize
-router.get("/burgers", function(req, res) {
-  // replace old function with sequelize function
-  db.Burger.findAll()
-    // use promise method to pass the burgers...
-    .then(function(dbBurger) {
-      console.log(dbBurger);
-      // into the main index, updating the page
-      var hbsObject = { burger: dbBurger };
-      return res.render("index", hbsObject);
-    });
+router.post('/', function(req, res) {
+	db.Burger.create({
+		burger_name: req.body.name
+	}).then(function(result) {
+		res.redirect('/');
+	});
 });
 
-// post route to create burgers
-router.post("/burgers/create", function(req, res) {
-  // edited burger create to add in a burger_name
-  db.Burger.create({
-    burger_name: req.body.burger_name
-  })
-    // pass the result of our call
-  .then(function(dbBurger) {
-      // log the result to our terminal/bash window
-    console.log(dbBurger);
-      // redirect
-    res.redirect("/");
-  });
+router.put('/:id', function(req, res){
+	var id = req.params.id;
+	db.Eater.findOne({
+		where: {
+			eater_name: req.body.eater
+		}	
+	}).then(function(eater) {
+		if (eater) {
+			updateBurger(eater, id, req, res);
+		} else {
+			db.Eater.create({
+				eater_name: req.body.eater
+			}).then(function(eater) {
+				updateBurger(eater, id, req, res);
+			});
+		}
+	});
 });
 
-// put route to devour a burger
-router.put("/burgers/update", function(req, res) {
-  // update one of the burgers
-  db.Burger.update({
-    devoured: true
-  },
-    {
-      where: {
-        id: req.body.burger_id
-      }
-    }
-  ).then(function(dbBurger) {
-    res.redirect("/");
-  });
+router.get('/api/:eatername', function(req, res) {
+	console.log(req.body);
+	db.Eater.findOne({
+		where: {
+			eater_name: req.params.eatername
+		},
+		include: [{
+			model: db.Burger
+		}]
+	}).then(function(result) {
+		res.json(result);
+	});
 });
+
+function updateBurger(eater, id, req, res) {
+	db.Burger.update(
+		{
+			devoured: req.body.devoured,
+			EaterId: eater.id
+		}, {
+			where: {
+			id: id
+		}
+	}).then(function(result) {
+		res.redirect('/');
+	});
+}
 
 module.exports = router;

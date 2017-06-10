@@ -1,22 +1,27 @@
 {
-  "name": "node_what_todo",
+  "name": "eat-da-burger",
   "version": "1.0.0",
-  "description": "-Node \r -Express \r -MySQL \r -Handlebars \r -Jquery",
-  "main": "server.js",
+  "description": "burger logger with MySQL, Node, Express, Handlebars and a homemade ORM",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sassour525/eat-da-burger.git"
+  },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.14.2",
-    "express": "^4.13.3",
-    "express-handlebars": "^2.0.1",
-    "method-override": "^2.3.5",
-    "mysql": "^2.11.1",
-    "sequelize": "^3.23.4"
+  "bugs": {
+    "url": "https://github.com/sassour525/eat-da-burger/issues"
   },
-  "devDependencies": {
-    "handlebars-helper-css": "^0.1.0"
+  "homepage": "https://github.com/sassour525/eat-da-burger#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.8",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.4"
   }
 }
